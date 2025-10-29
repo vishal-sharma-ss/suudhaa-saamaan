@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllProducts, deleteProduct, updateProduct } from '../../firebase/firestore';
+import { getAllProducts, deleteProduct, updateProduct } from '../firebase/firestore';
 import AdminLayout from './AdminLayout';
 import { Edit, Trash2, Plus, Search, Filter } from 'lucide-react';
 import { formatPrice } from '../../utils/formatters';
