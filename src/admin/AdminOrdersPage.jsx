@@ -6,11 +6,11 @@ import AdminLayout from './AdminLayout';
 import { Search, Filter, Printer, Eye, Phone, MapPin, Package } from 'lucide-react';
 import { formatPrice, formatDateTime, formatAddress } from '../../utils/formatters';
 import { ORDER_STATUSES, ORDER_STATUS_COLORS } from '../utils/constants';
-import Button from '../../components/common/Button';
-import Modal from '../../components/common/Modal';
-import Loader from '../../components/common/Loader';
-import { useToast } from '../../components/common/Toast';
-import { openWhatsApp } from '../../utils/helpers';
+import Button from '../components/common/Button';
+import Modal from '../components/common/Modal';
+import Loader from '../components/common/Loader';
+import { useToast } from '../components/common/Toast';
+import { openWhatsApp } from '../utils/helpers';
 
 const AdminOrdersPage = () => {
   const { success, error: showError } = useToast();

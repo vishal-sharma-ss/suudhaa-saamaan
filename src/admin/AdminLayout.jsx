@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { logoutUser } from '../../firebase/auth';
+import { useAuth } from '../context/AuthContext';
+import { logoutUser } from '../firebase/auth';
 import {
   LayoutDashboard, Package, ShoppingBag, Users, BarChart3,
   Tag, Settings, LogOut, Menu, X, TrendingUp, Warehouse
 } from 'lucide-react';
-import { useToast } from '../../components/common/Toast';
+import { useToast } from '../components/common/Toast';
 
 const AdminLayout = ({ children }) => {
   const location = useLocation();

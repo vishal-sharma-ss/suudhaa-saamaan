@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { getAllProducts, deleteProduct, updateProduct } from '../firebase/firestore';
 import AdminLayout from './AdminLayout';
 import { Edit, Trash2, Plus, Search, Filter } from 'lucide-react';
-import { formatPrice } from '../../utils/formatters';
-import Button from '../../components/common/Button';
-import { ConfirmModal } from '../../components/common/Modal';
-import Loader from '../../components/common/Loader';
-import { useToast } from '../../components/common/Toast';
+import { formatPrice } from '../utils/formatters';
+import Button from '../components/common/Button';
+import { ConfirmModal } from '../components/common/Modal';
+import Loader from '../components/common/Loader';
+import { useToast } from '../components/common/Toast';
 
 const AdminProductsPage = () => {
   const navigate = useNavigate();

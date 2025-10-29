@@ -9,7 +9,7 @@ import {
   DollarSign, Clock, CheckCircle, AlertCircle 
 } from 'lucide-react';
 import { formatPrice } from '../utils/formatters';
-import Loader from '../../components/common/Loader';
+import Loader from '../components/common/Loader';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();

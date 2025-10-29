@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addProduct } from '../../firebase/firestore';
-import { uploadMultipleImages } from '../../firebase/storage';
+import { addProduct } from '../firebase/firestore';
+import { uploadMultipleImages } from '../firebase/storage';
 import AdminLayout from './AdminLayout';
-import Input from '../../components/common/Input';
-import Button from '../../components/common/Button';
+import Input from '../components/common/Input';
+import Button from '../components/common/Button';
 import { Upload, Plus, X, Save } from 'lucide-react';
-import { CATEGORIES } from '../../utils/constants';
-import { useToast } from '../../components/common/Toast';
+import { CATEGORIES } from '../utils/constants';
+import { useToast } from '../components/common/Toast';
 
 const AddProductPage = () => {
   const navigate = useNavigate();
