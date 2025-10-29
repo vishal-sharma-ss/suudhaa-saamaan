@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useProducts } from '../../context/ProductContext';
-import { Filter, SlidersHorizontal, X, Grid3x3, List } from 'lucide-react';
+import { Filter, SlidersHorizontal, X, LayoutGrid, List } from 'lucide-react'; // ✅ replaced Grid3x3 with LayoutGrid
 import ProductCard from '../../components/product/ProductCard';
 import { ProductCardSkeleton } from '../../components/common/Loader';
 import Button from '../../components/common/Button';
@@ -14,11 +14,11 @@ const CategoryPage = () => {
   const { categoryId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const { products, loading } = useProducts();
-  
+
   // UI State
   const [showFilters, setShowFilters] = useState(false);
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
-  
+
   // Filter State
   const [filters, setFilters] = useState({
     priceRange: [0, 10000],
@@ -33,24 +33,14 @@ const CategoryPage = () => {
   // Filter and sort products
   const filteredProducts = products
     .filter(product => {
-      // Category filter
       if (categoryId && product.category !== categoryId) return false;
-      
-      // Price range filter
-      if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
-        return false;
-      }
-      
-      // Stock filter
-      if (filters.inStock && (!product.stock || product.stock === 0)) {
-        return false;
-      }
-      
-      // Organic filter
-      if (filters.organic && !product.badges?.includes('Organic')) {
-        return false;
-      }
-      
+
+      if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) return false;
+
+      if (filters.inStock && (!product.stock || product.stock === 0)) return false;
+
+      if (filters.organic && !product.badges?.includes('Organic')) return false;
+
       return true;
     })
     .sort((a, b) => {
@@ -63,21 +53,22 @@ const CategoryPage = () => {
           return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
         case 'popular':
           return (b.sales || 0) - (a.sales || 0);
-        default: // featured
+        default:
           return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
       }
     });
 
-  // Filter Sidebar Component
+  // Filter Sidebar
   const FilterSidebar = () => (
-    <div className={`
-      fixed lg:static top-0 right-0 h-full lg:h-auto
-      w-80 bg-white shadow-2xl lg:shadow-none
-      z-50 lg:z-0 p-6 overflow-y-auto
-      transform transition-transform duration-300
-      ${showFilters ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
-    `}>
-      {/* Header */}
+    <div
+      className={`
+        fixed lg:static top-0 right-0 h-full lg:h-auto
+        w-80 bg-white shadow-2xl lg:shadow-none
+        z-50 lg:z-0 p-6 overflow-y-auto
+        transform transition-transform duration-300
+        ${showFilters ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
+      `}
+    >
       <div className="flex items-center justify-between mb-6 lg:hidden">
         <h3 className="text-xl font-bold">Filters</h3>
         <button onClick={() => setShowFilters(false)}>
@@ -121,10 +112,9 @@ const CategoryPage = () => {
             max="10000"
             step="100"
             value={filters.priceRange[1]}
-            onChange={(e) => setFilters({
-              ...filters,
-              priceRange: [0, parseInt(e.target.value)]
-            })}
+            onChange={(e) =>
+              setFilters({ ...filters, priceRange: [0, parseInt(e.target.value)] })
+            }
             className="w-full accent-primary"
           />
           <div className="flex justify-between text-sm text-gray-600">
@@ -164,16 +154,17 @@ const CategoryPage = () => {
         </label>
       </div>
 
-      {/* Clear Filters */}
       <Button
         variant="outline"
         fullWidth
-        onClick={() => setFilters({
-          priceRange: [0, 10000],
-          inStock: false,
-          organic: false,
-          sortBy: 'featured'
-        })}
+        onClick={() =>
+          setFilters({
+            priceRange: [0, 10000],
+            inStock: false,
+            organic: false,
+            sortBy: 'featured'
+          })
+        }
       >
         Clear All Filters
       </Button>
@@ -202,7 +193,6 @@ const CategoryPage = () => {
       {/* Main Content */}
       <div className="container-custom py-8">
         <div className="flex gap-8">
-          
           {/* Filters Sidebar - Desktop */}
           <div className="hidden lg:block w-80 flex-shrink-0">
             <FilterSidebar />
@@ -210,11 +200,8 @@ const CategoryPage = () => {
 
           {/* Products Area */}
           <div className="flex-1">
-            
             {/* Toolbar */}
             <div className="bg-white rounded-xl shadow-sm p-4 mb-6 flex items-center justify-between">
-              
-              {/* Mobile Filter Button */}
               <button
                 onClick={() => setShowFilters(true)}
                 className="lg:hidden flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg"
@@ -223,12 +210,10 @@ const CategoryPage = () => {
                 Filters
               </button>
 
-              {/* Results Count */}
               <p className="text-gray-600 font-medium">
                 Showing {filteredProducts.length} products
               </p>
 
-              {/* View Mode Toggle */}
               <div className="flex gap-2">
                 <button
                   onClick={() => setViewMode('grid')}
@@ -238,7 +223,7 @@ const CategoryPage = () => {
                       : 'bg-gray-100 text-gray-600'
                   }`}
                 >
-                  <Grid3x3 className="w-5 h-5" />
+                  <LayoutGrid className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
@@ -261,29 +246,34 @@ const CategoryPage = () => {
                 ))}
               </div>
             ) : filteredProducts.length > 0 ? (
-              <div className={`
-                ${viewMode === 'grid' 
-                  ? 'grid grid-cols-2 lg:grid-cols-3 gap-6' 
-                  : 'space-y-4'
-                }
-              `}>
-                {filteredProducts.map(product => (
+              <div
+                className={`${
+                  viewMode === 'grid'
+                    ? 'grid grid-cols-2 lg:grid-cols-3 gap-6'
+                    : 'space-y-4'
+                }`}
+              >
+                {filteredProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             ) : (
               <div className="text-center py-16">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-2xl font-bold text-dark mb-2">No products found</h3>
+                <h3 className="text-2xl font-bold text-dark mb-2">
+                  No products found
+                </h3>
                 <p className="text-gray-600 mb-6">Try adjusting your filters</p>
                 <Button
                   variant="primary"
-                  onClick={() => setFilters({
-                    priceRange: [0, 10000],
-                    inStock: false,
-                    organic: false,
-                    sortBy: 'featured'
-                  })}
+                  onClick={() =>
+                    setFilters({
+                      priceRange: [0, 10000],
+                      inStock: false,
+                      organic: false,
+                      sortBy: 'featured'
+                    })
+                  }
                 >
                   Clear Filters
                 </Button>
