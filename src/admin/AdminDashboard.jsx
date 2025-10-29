@@ -8,7 +8,7 @@ import {
   TrendingUp, ShoppingBag, Package, Users, 
   DollarSign, Clock, CheckCircle, AlertCircle 
 } from 'lucide-react';
-import { formatPrice } from '../../utils/formatters';
+import { formatPrice } from '../utils/formatters';
 import Loader from '../../components/common/Loader';
 
 const AdminDashboard = () => {
