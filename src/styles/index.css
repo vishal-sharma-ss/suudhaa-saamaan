@@ -1,0 +1,164 @@
+/* 🎨 Global Styles for Suudhaa Saamaan */
+
+/* Tailwind CSS imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    color: #333333;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  
+  /* Remove default button styles */
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+  }
+  
+  /* Remove input autofill yellow background */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #FF6B00;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e05a00;
+  }
+}
+
+/* Custom utility classes */
+@layer components {
+  /* Primary button style */
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-lg font-medium 
+           hover:bg-orange-600 transition-all duration-200 
+           active:scale-95 shadow-md hover:shadow-lg;
+  }
+  
+  /* Secondary button style */
+  .btn-secondary {
+    @apply bg-white text-primary border-2 border-primary px-6 py-3 
+           rounded-lg font-medium hover:bg-primary hover:text-white 
+           transition-all duration-200 active:scale-95;
+  }
+  
+  /* Card container */
+  .card {
+    @apply bg-white rounded-lg shadow-md p-4 hover:shadow-lg 
+           transition-shadow duration-200;
+  }
+  
+  /* Input field */
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg 
+           focus:outline-none focus:border-primary focus:ring-2 
+           focus:ring-primary focus:ring-opacity-20 transition-all;
+  }
+  
+  /* Section container */
+  .section {
+    @apply px-4 py-8 md:px-8 md:py-12 lg:px-16 lg:py-16;
+  }
+  
+  /* Container with max width */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4;
+  }
+}
+
+/* Animation utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounceSubtle 0.5s ease-in-out;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .section {
+    @apply px-4 py-6;
+  }
+}
+
+/* Print styles (for order receipts) */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
