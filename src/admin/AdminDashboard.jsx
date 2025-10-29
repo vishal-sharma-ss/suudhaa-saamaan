@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllOrders, getAllProducts, getAllCustomers } from '../../firebase/firestore';
+import { getAllOrders, getAllProducts, getAllCustomers } from'../firebase/firestore';
 import AdminLayout from './AdminLayout';
 import { 
   TrendingUp, ShoppingBag, Package, Users, 
