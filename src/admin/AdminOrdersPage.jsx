@@ -1,7 +1,7 @@
 // 📦 Admin Orders Page - Manage All Orders
 
 import React, { useState, useEffect } from 'react';
-import { getAllOrders, updateOrderStatus } from '../../firebase/firestore';
+import { getAllOrders, updateOrderStatus } from '../firebase/firestore';
 import AdminLayout from './AdminLayout';
 import { Search, Filter, Printer, Eye, Phone, MapPin, Package } from 'lucide-react';
 import { formatPrice, formatDateTime, formatAddress } from '../../utils/formatters';
