@@ -1,4 +1,4 @@
-// ✍️ Signup Page - New User Registration
+// ✍️ Signup Page - IMPORTS FIXED
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -43,14 +43,12 @@ const SignupPage = () => {
     } else {
       setFormData({ ...formData, [field]: value });
     }
-    // Clear error
     setErrors({ ...errors, [field]: '' });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate
     const validation = validateSignupForm(formData);
     if (!validation.valid) {
       setErrors(validation.errors);
@@ -58,7 +56,6 @@ const SignupPage = () => {
       return;
     }
 
-    // Check password match
     if (formData.password !== formData.confirmPassword) {
       setErrors({ confirmPassword: 'Passwords do not match' });
       showError('Passwords do not match');
@@ -67,7 +64,6 @@ const SignupPage = () => {
 
     setLoading(true);
 
-    // Register
     const result = await registerUser(formData);
 
     if (result.success) {
@@ -84,7 +80,6 @@ const SignupPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-secondary to-primary py-12 px-4">
       <div className="max-w-2xl mx-auto">
         
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-primary text-4xl font-bold mx-auto mb-4 shadow-xl">
             S
@@ -93,172 +88,62 @@ const SignupPage = () => {
           <p className="text-white/80">Join Suudhaa Saamaan today</p>
         </div>
 
-        {/* Signup Form */}
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             
-            {/* Personal Info Section */}
             <div>
               <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
               <div className="space-y-4">
-                <Input
-                  label="Full Name"
-                  placeholder="Vishal Sharma"
-                  value={formData.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                  icon={<User className="w-5 h-5" />}
-                  error={errors.name}
-                  required
-                />
-
-                <Input
-                  label="Phone Number"
-                  type="tel"
-                  placeholder="9821072912"
-                  value={formData.phone}
-                  onChange={(e) => handleChange('phone', e.target.value)}
-                  icon={<Phone className="w-5 h-5" />}
-                  maxLength={10}
-                  error={errors.phone}
-                  helperText="10-digit mobile number"
-                  required
-                />
-
-                <Input
-                  label="Age"
-                  type="number"
-                  placeholder="25"
-                  value={formData.age}
-                  onChange={(e) => handleChange('age', e.target.value)}
-                  icon={<Calendar className="w-5 h-5" />}
-                  error={errors.age}
-                  required
-                />
+                <Input label="Full Name" placeholder="Vishal Sharma" value={formData.name} onChange={(e) => handleChange('name', e.target.value)} icon={<User className="w-5 h-5" />} error={errors.name} required />
+                <Input label="Phone Number" type="tel" placeholder="9821072912" value={formData.phone} onChange={(e) => handleChange('phone', e.target.value)} icon={<Phone className="w-5 h-5" />} maxLength={10} error={errors.phone} helperText="10-digit mobile number" required />
+                <Input label="Age" type="number" placeholder="25" value={formData.age} onChange={(e) => handleChange('age', e.target.value)} icon={<Calendar className="w-5 h-5" />} error={errors.age} required />
               </div>
             </div>
 
-            {/* Address Section */}
             <div>
               <h3 className="text-lg font-semibold mb-4">Delivery Address</h3>
               <div className="space-y-4">
-                <Input
-                  label="City"
-                  value="Butwal"
-                  disabled
-                  icon={<MapPin className="w-5 h-5" />}
-                />
-
+                <Input label="City" value="Butwal" disabled icon={<MapPin className="w-5 h-5" />} />
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Area <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    value={formData.address.area}
-                    onChange={(e) => handleChange('address.area', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
-                  >
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Area <span className="text-red-500">*</span></label>
+                  <select value={formData.address.area} onChange={(e) => handleChange('address.area', e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
                     <option value="">Select Area</option>
-                    {BUTWAL_AREAS.map(area => (
-                      <option key={area} value={area}>{area}</option>
-                    ))}
+                    {BUTWAL_AREAS.map(area => <option key={area} value={area}>{area}</option>)}
                   </select>
                 </div>
-
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Ward Number <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    value={formData.address.ward}
-                    onChange={(e) => handleChange('address.ward', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
-                  >
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Ward Number <span className="text-red-500">*</span></label>
+                  <select value={formData.address.ward} onChange={(e) => handleChange('address.ward', e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-primary">
                     <option value="">Select Ward</option>
-                    {BUTWAL_WARDS.map(ward => (
-                      <option key={ward.value} value={ward.value}>{ward.label}</option>
-                    ))}
+                    {BUTWAL_WARDS.map(ward => <option key={ward.value} value={ward.value}>{ward.label}</option>)}
                   </select>
                 </div>
-
-                <Input
-                  label="Street Name"
-                  placeholder="Kanti Path"
-                  value={formData.address.street}
-                  onChange={(e) => handleChange('address.street', e.target.value)}
-                  required
-                />
-
-                <Input
-                  label="Nearby Famous Place"
-                  placeholder="Kanti Secondary School"
-                  value={formData.address.nearbyPlace}
-                  onChange={(e) => handleChange('address.nearbyPlace', e.target.value)}
-                  required
-                />
+                <Input label="Street Name" placeholder="Kanti Path" value={formData.address.street} onChange={(e) => handleChange('address.street', e.target.value)} required />
+                <Input label="Nearby Famous Place" placeholder="Kanti Secondary School" value={formData.address.nearbyPlace} onChange={(e) => handleChange('address.nearbyPlace', e.target.value)} required />
               </div>
             </div>
 
-            {/* Security Section */}
             <div>
               <h3 className="text-lg font-semibold mb-4">Security</h3>
               <div className="space-y-4">
-                <Input
-                  label="Password"
-                  type="password"
-                  placeholder="Minimum 6 characters"
-                  value={formData.password}
-                  onChange={(e) => handleChange('password', e.target.value)}
-                  icon={<Lock className="w-5 h-5" />}
-                  showPasswordToggle
-                  error={errors.password}
-                  required
-                />
-
-                <Input
-                  label="Confirm Password"
-                  type="password"
-                  placeholder="Re-enter password"
-                  value={formData.confirmPassword}
-                  onChange={(e) => handleChange('confirmPassword', e.target.value)}
-                  icon={<Lock className="w-5 h-5" />}
-                  showPasswordToggle
-                  error={errors.confirmPassword}
-                  required
-                />
+                <Input label="Password" type="password" placeholder="Minimum 6 characters" value={formData.password} onChange={(e) => handleChange('password', e.target.value)} icon={<Lock className="w-5 h-5" />} showPasswordToggle error={errors.password} required />
+                <Input label="Confirm Password" type="password" placeholder="Re-enter password" value={formData.confirmPassword} onChange={(e) => handleChange('confirmPassword', e.target.value)} icon={<Lock className="w-5 h-5" />} showPasswordToggle error={errors.confirmPassword} required />
               </div>
             </div>
 
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              fullWidth
-              loading={loading}
-            >
-              Create Account
-            </Button>
+            <Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>Create Account</Button>
 
-            {/* Login Link */}
             <div className="text-center pt-4">
               <p className="text-gray-600">
                 Already have an account?{' '}
-                <Link to="/login" className="text-primary font-semibold hover:underline">
-                  Login here
-                </Link>
+                <Link to="/login" className="text-primary font-semibold hover:underline">Login here</Link>
               </p>
             </div>
           </form>
         </div>
 
-        {/* Back to Home */}
         <div className="text-center mt-6">
-          <button
-            onClick={() => navigate('/')}
-            className="text-white hover:underline text-sm"
-          >
-            ← Back to Home
-          </button>
+          <button onClick={() => navigate('/')} className="text-white hover:underline text-sm">← Back to Home</button>
         </div>
       </div>
     </div>

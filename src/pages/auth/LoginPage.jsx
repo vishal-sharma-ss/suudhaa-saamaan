@@ -1,12 +1,12 @@
-// 🔐 Customer Login Page - FIXED (No Admin Confusion)
+// 🔐 Customer Login Page - IMPORTS FIXED
 
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { loginUser } from '../firebase/auth';
-import Input from '../components/common/Input';
-import Button from '../components/common/Button';
+import { loginUser } from '../../firebase/auth';
+import Input from '../../components/common/Input';
+import Button from '../../components/common/Button';
 import { Phone, Lock } from 'lucide-react';
-import { useToast } from '../components/common/Toast';
+import { useToast } from '../../components/common/Toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
