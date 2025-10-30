@@ -1,12 +1,12 @@
-// 🔐 Login Page - Phone + Password Authentication
+// 🔐 Customer Login Page - FIXED (No Admin Confusion)
 
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { loginUser } from '../../firebase/auth';
-import Input from '../../components/common/Input';
-import Button from '../../components/common/Button';
-import { Phone, Lock, Eye, EyeOff } from 'lucide-react';
-import { useToast } from '../../components/common/Toast';
+import { loginUser } from '../firebase/auth';
+import Input from '../components/common/Input';
+import Button from '../components/common/Button';
+import { Phone, Lock } from 'lucide-react';
+import { useToast } from '../components/common/Toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ const LoginPage = () => {
     password: ''
   });
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +29,7 @@ const LoginPage = () => {
       success('✅ Login successful!');
       
       // Redirect to previous page or dashboard
-      const from = location.state?.from || (result.isAdmin ? '/admin/dashboard' : '/customer/dashboard');
+      const from = location.state?.from || '/customer/dashboard';
       navigate(from);
     } else {
       showError(result.error || 'Login failed');
@@ -71,7 +70,7 @@ const LoginPage = () => {
             {/* Password */}
             <Input
               label="Password"
-              type={showPassword ? 'text' : 'password'}
+              type="password"
               placeholder="Enter your password"
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -79,13 +78,6 @@ const LoginPage = () => {
               showPasswordToggle
               required
             />
-
-            {/* Admin Login Hint */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-700">
-              <p className="font-medium">💡 Admin Login:</p>
-              <p className="text-xs mt-1">Add <code className="bg-blue-100 px-1 rounded">@ADMIN</code> after your phone number</p>
-              <p className="text-xs">Example: 9821072912@ADMIN</p>
-            </div>
 
             {/* Login Button */}
             <Button
@@ -120,6 +112,16 @@ const LoginPage = () => {
               </Button>
             </Link>
           </form>
+
+          {/* Admin Login Link */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <button
+              onClick={() => navigate('/admin/login')}
+              className="w-full text-center text-gray-600 hover:text-primary text-sm font-medium transition-colors"
+            >
+              🔐 Admin? Login here →
+            </button>
+          </div>
         </div>
 
         {/* Back to Home */}

@@ -1,9 +1,7 @@
-// 🏠 Main App Component - COMPLETE WITH ADMIN PANEL
+// 🏠 Main App - WITH ADMIN LOGIN ROUTE
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-// Context Providers
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ProductProvider } from './context/ProductContext';
@@ -29,6 +27,7 @@ import SignupPage from './pages/auth/SignupPage';
 import CustomerDashboard from './pages/customer/CustomerDashboard';
 
 // Admin Pages
+import AdminLoginPage from './admin/AdminLoginPage';
 import AdminDashboard from './admin/AdminDashboard';
 import AdminProductsPage from './admin/AdminProductsPage';
 import AddProductPage from './admin/AddProductPage';
@@ -47,13 +46,9 @@ function App() {
                 <div className="App min-h-screen bg-white flex flex-col">
                   <Header />
                   <div className="sticky top-16 md:top-20 z-30 bg-white shadow-sm">
-                    <div className="container-custom py-3">
-                      <SearchBar />
-                    </div>
+                    <div className="container-custom py-3"><SearchBar /></div>
                   </div>
-                  <main className="flex-1">
-                    <HomePage />
-                  </main>
+                  <main className="flex-1"><HomePage /></main>
                   <Footer />
                   <BottomNav />
                 </div>
@@ -63,13 +58,9 @@ function App() {
                 <div className="App min-h-screen bg-white flex flex-col">
                   <Header />
                   <div className="sticky top-16 md:top-20 z-30 bg-white shadow-sm">
-                    <div className="container-custom py-3">
-                      <SearchBar />
-                    </div>
+                    <div className="container-custom py-3"><SearchBar /></div>
                   </div>
-                  <main className="flex-1">
-                    <CategoryPage />
-                  </main>
+                  <main className="flex-1"><CategoryPage /></main>
                   <Footer />
                   <BottomNav />
                 </div>
@@ -79,13 +70,9 @@ function App() {
                 <div className="App min-h-screen bg-white flex flex-col">
                   <Header />
                   <div className="sticky top-16 md:top-20 z-30 bg-white shadow-sm">
-                    <div className="container-custom py-3">
-                      <SearchBar />
-                    </div>
+                    <div className="container-custom py-3"><SearchBar /></div>
                   </div>
-                  <main className="flex-1">
-                    <CategoryPage />
-                  </main>
+                  <main className="flex-1"><CategoryPage /></main>
                   <Footer />
                   <BottomNav />
                 </div>
@@ -95,13 +82,9 @@ function App() {
                 <div className="App min-h-screen bg-white flex flex-col">
                   <Header />
                   <div className="sticky top-16 md:top-20 z-30 bg-white shadow-sm">
-                    <div className="container-custom py-3">
-                      <SearchBar />
-                    </div>
+                    <div className="container-custom py-3"><SearchBar /></div>
                   </div>
-                  <main className="flex-1">
-                    <ProductDetailPage />
-                  </main>
+                  <main className="flex-1"><ProductDetailPage /></main>
                   <Footer />
                   <BottomNav />
                 </div>
@@ -111,13 +94,9 @@ function App() {
                 <div className="App min-h-screen bg-white flex flex-col">
                   <Header />
                   <div className="sticky top-16 md:top-20 z-30 bg-white shadow-sm">
-                    <div className="container-custom py-3">
-                      <SearchBar />
-                    </div>
+                    <div className="container-custom py-3"><SearchBar /></div>
                   </div>
-                  <main className="flex-1">
-                    <CartPage />
-                  </main>
+                  <main className="flex-1"><CartPage /></main>
                   <Footer />
                   <BottomNav />
                 </div>
@@ -126,9 +105,7 @@ function App() {
               <Route path="/checkout" element={
                 <div className="App min-h-screen bg-white flex flex-col">
                   <Header />
-                  <main className="flex-1">
-                    <CheckoutPage />
-                  </main>
+                  <main className="flex-1"><CheckoutPage /></main>
                   <Footer />
                   <BottomNav />
                 </div>
@@ -137,25 +114,15 @@ function App() {
               {/* ========== AUTH ROUTES (no layout) ========== */}
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
+              
+              {/* ADMIN LOGIN - Separate Page */}
+              <Route path="/admin/login" element={<AdminLoginPage />} />
 
               {/* ========== CUSTOMER ROUTES ========== */}
               <Route path="/customer/dashboard" element={
                 <div className="App min-h-screen bg-white flex flex-col">
                   <Header />
-                  <main className="flex-1">
-                    <CustomerDashboard />
-                  </main>
-                  <Footer />
-                  <BottomNav />
-                </div>
-              } />
-
-              <Route path="/customer/orders" element={
-                <div className="App min-h-screen bg-white flex flex-col">
-                  <Header />
-                  <main className="flex-1">
-                    <CustomerDashboard />
-                  </main>
+                  <main className="flex-1"><CustomerDashboard /></main>
                   <Footer />
                   <BottomNav />
                 </div>
@@ -166,13 +133,6 @@ function App() {
               <Route path="/admin/products" element={<AdminProductsPage />} />
               <Route path="/admin/products/add" element={<AddProductPage />} />
               <Route path="/admin/orders" element={<AdminOrdersPage />} />
-              
-              {/* More admin routes can be added here */}
-              {/* <Route path="/admin/inventory" element={<AdminInventory />} /> */}
-              {/* <Route path="/admin/customers" element={<AdminCustomers />} /> */}
-              {/* <Route path="/admin/analytics" element={<AdminAnalytics />} /> */}
-              {/* <Route path="/admin/coupons" element={<AdminCoupons />} /> */}
-              {/* <Route path="/admin/settings" element={<AdminSettings />} /> */}
               
             </Routes>
           </ProductProvider>
