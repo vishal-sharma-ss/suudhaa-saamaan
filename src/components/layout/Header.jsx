@@ -38,10 +38,11 @@ const Header = () => {
               to="/" 
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              {/* Logo Image - Replace with your actual logo */}
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-xl md:text-2xl">
-                S
-              </div>
+             {/* Logo Image - Actual logo from public folder */}
+                <img 
+                src="/logo.png" 
+                alt="Logo" 
+                className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-full"/>
               
               {/* Brand Name + Tagline */}
               <div className="flex flex-col">
