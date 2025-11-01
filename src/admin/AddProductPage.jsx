@@ -152,7 +152,12 @@ const AddProductPage = () => {
                   <label className="aspect-square rounded-lg border-2 border-dashed border-gray-300 hover:border-primary cursor-pointer flex flex-col items-center justify-center transition-colors">
                     <Upload className="w-8 h-8 text-gray-400 mb-2" />
                     <span className="text-xs text-gray-600">Upload</span>
-                    <input type="file" accept="image/*" multiple onChange={handleImageSelect} className="hidden" />
+                    <Input 
+  label="Image URL" 
+  placeholder="https://images.unsplash.com/photo-..." 
+  value={imageUrl}
+  onChange={(e) => setImageUrl(e.target.value)}
+/>
                   </label>
                 )}
               </div>
